@@ -27,17 +27,21 @@ endfunction
 
 " Filter results with FZF given specific options
 function! tagquery#fzf(query)
-    call fzf#run({
-                \ 'source': tagquery#execute_cli(a:query, s:local_ctags_file),
+    let source = tagquery#execute_cli(a:query, s:local_ctags_file)
+    call map(source, { _, val -> substitute(val, '\t', ':', 'g') })
+
+    call fzf#run(fzf#vim#with_preview({
+                \ 'source': source,
+                \ 'options': '--delimiter : --with-nth="3.."',
                 \ 'sink': function('s:fzf_sink'),
-                \ 'down': 10,
-                \ })
+                \ 'down': 10, }),
+                \ 'right:50%')
 endfunction
 
 
 " Handles opening a selected result
 function! s:fzf_sink(result)
-    let parts = split(a:result)
+    let parts = split(a:result, ':')
     let filepath = parts[0]
     let location = '+' . parts[1]
     execute 'silent' 'edit' location filepath
