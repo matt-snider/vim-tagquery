@@ -26,6 +26,8 @@ try_wget() {
 
 download() {
     echo "Downloading binary ${name}..."
+    mkdir bin/
+
     url=$url/releases/download/$version/${1}
     if (try_curl "$url" || try_wget "$url"); then
         chmod a+x bin/$name
