@@ -26,7 +26,7 @@ try_wget() {
 
 download() {
     echo "Downloading binary ${name}..."
-    mkdir bin/
+    mkdir -p bin/
 
     url=$url/releases/download/$version/${1}
     if (try_curl "$url" || try_wget "$url"); then
