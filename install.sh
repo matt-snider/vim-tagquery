@@ -1,10 +1,10 @@
 #!/usr/bin/env sh
-# 
+#
 # Download the `ctags-query` binary, falling back to building with `cargo` if that fails.
 #
 # Script modified from autozimu/LanguageClient-neovim
 # https://github.com/autozimu/LanguageClient-neovim/blob/next/LICENSE.txt
-# 
+#
 # Copyright (c) 2017 Junfeng Li <autozimu@gmail.com> and contributors.
 
 set -o nounset    # error when referencing undefined variable
@@ -12,7 +12,7 @@ set -o errexit    # exit when command fails
 
 name=ctags-query
 url=https://github.com/matt-snider/$name
-version=0.1.0
+version=0.1.1
 
 try_curl() {
     command -v curl > /dev/null && \
