@@ -5,7 +5,13 @@
 " ============================================================================
 let s:root = expand('<sfile>:p:h:h')
 let s:ctags_binary = 'ctags-query'
-let s:local_ctags_file = getcwd() . '/.tags'
+
+if exists('g:tagquery_ctags_file')
+    let s:local_ctags_file = g:tagquery_ctags_file
+else
+    let s:local_ctags_file = getcwd() . '/.tags'
+endif
+"echom 'xxxx:' s:local_ctags_file
 
 
 " Returns the path to the `ctags-query` binary
@@ -18,8 +24,9 @@ endfunction
 " a list of lines output by `ctags-query`.
 function! tagquery#execute_cli(query, ctags_path) abort
     let cmd = tagquery#binary_path() . ' '
-                \ . '-f' . a:ctags_path . ' '
+                \ . '-f ' . a:ctags_path . ' '
                 \ . shellescape(a:query)
+    "echom 'xxxx:' cmd
     let result = system(cmd)
     return split(result, '\n')
 endfunction
