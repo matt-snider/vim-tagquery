@@ -26,7 +26,6 @@ function! tagquery#execute_cli(query, ctags_path) abort
     let cmd = tagquery#binary_path() . ' '
                 \ . '-f ' . a:ctags_path . ' '
                 \ . shellescape(a:query)
-    "echom 'xxxx:' cmd
     let result = system(cmd)
     return split(result, '\n')
 endfunction
