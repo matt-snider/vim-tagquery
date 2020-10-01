@@ -11,7 +11,6 @@ if exists('g:tagquery_ctags_file')
 else
     let s:local_ctags_file = getcwd() . '/.tags'
 endif
-"echom 'xxxx:' s:local_ctags_file
 
 
 " Returns the path to the `ctags-query` binary
